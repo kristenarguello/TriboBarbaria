@@ -34,11 +34,9 @@ relatório. A saída para cada caso é composta por:
     1. Identificação do caso de teste.
     2. Resultado do caso de teste.
     
-<img width="322" alt="Screenshot 2022-11-09 at 12 03 54" src="https://user-images.githubusercontent.com/101675327/200865537-a000f400-3ea0-4788-941b-897c5efe297d.png">
-Figura 1 - Exemplo de arquivo de entrada do trabalho.
+<img width="322" alt="Screenshot 2022-11-09 at 12 03 54" src="https://user-images.githubusercontent.com/101675327/200865537-a000f400-3ea0-4788-941b-897c5efe297d.png">Figura 1 - Exemplo de arquivo de entrada do trabalho.
 
-<img width="666" alt="Screenshot 2022-11-09 at 12 03 25" src="https://user-images.githubusercontent.com/101675327/200865445-a9396d66-74eb-4f6d-b7fd-9f68a1f40808.png">
-Figura 2 - Árvore resultante da interpretação do pergaminho da Figura 1.
+<img width="666" alt="Screenshot 2022-11-09 at 12 03 25" src="https://user-images.githubusercontent.com/101675327/200865445-a9396d66-74eb-4f6d-b7fd-9f68a1f40808.png">Figura 2 - Árvore resultante da interpretação do pergaminho da Figura 1.
 
 
 --Considerações finais--
