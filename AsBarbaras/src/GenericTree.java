@@ -1,7 +1,4 @@
-public class GenericTree {
-
-    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    // NODO BASICO PARA A CONSTRUÇÃ DA ÁRVORE
+public class GenericTree {   
     private class TreeNode {
         public int value;
         public TreeNode father;
@@ -48,7 +45,6 @@ public class GenericTree {
             nChild--;
             children[nChild] = null;
             return true;
-            // atualizar nElementos
         }
 
         // busca subtree pelo indice dentro da lista de filhos
@@ -63,10 +59,7 @@ public class GenericTree {
             return nChild;
         }
     }
-    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-    // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-    // ATRIBUTOS E MÉTODOS DA ÁRVORE
     private TreeNode root;
     private int nElements;
 
@@ -75,9 +68,7 @@ public class GenericTree {
         this.nElements = 0;
     }
 
-    // método privado elaborado na versão 0.2
     private TreeNode searchNode(Integer value, TreeNode ref) {
-
         if (ref != null) {
             if (ref.value == value)
                 return ref;
@@ -92,12 +83,8 @@ public class GenericTree {
             }
         } else
             return null;
-
     }
 
-    // insere o elemento e como filho de father
-    // Versao 0.1 -> Inclui root e inclui filho de root
-    // Versao 0.2 -> Permite a inclusão de mais níveis na árvore
     public boolean add(Integer e, Integer father) {
         TreeNode aux;
         if (nElements == 0) {
@@ -110,136 +97,76 @@ public class GenericTree {
                 aux.addSubtree(new TreeNode(e));
         }
         nElements++;
-
         return true;
     }
 
-    // retorna o elemento armazenado na raiz
     public Integer getRoot() {
         if (root != null)
             return root.value;
         return null;
     }
 
-    // altera o elemento armazenado na raiz
     public void setRoot(Integer e) {
         if ((e != null) && (root != null)) {
             root.value = e;
         }
-
     }
 
-    // retorna o pai do elemento e
     public Integer getParent(Integer e) {
         TreeNode aux = searchNode(e, this.root);
-        /*
-         * if (aux == null)
-         * return null;
-         * else {
-         * if (aux.father==null)
-         * return null;
-         * else
-         * return aux.father.value;
-         */
         if ((aux != null) && (aux.father != null))
             return aux.father.value;
         return null;
-        // codigo mais enxuto
-
-    }
-    // manipular o valor armazenado dentro de um nodo, passa o valor buscado como
-    // parametro
-    // mais facil achar assim
-
-    // remove o elemento e e seus filhos
-    boolean removeBranch(Integer e) {
-        TreeNode aux = searchNode(e, root);
-        if (aux == null)
-            return false;
-        if (aux == this.root) {
-            clear();
-            return true;
-        } else
-            aux.father.removeSubtree(aux);
-        return true;
-
     }
 
-    // retorna true se a árvore contém o elemento e
     boolean contains(Integer e) {
         return (searchNode(e, this.root) == null) ? false : true;
     }
 
-    // retorna true se o elemento está armazenado em um nodo interno
     boolean isInternal(Integer e) {
         TreeNode aux = searchNode(e, this.root);
-        if ((aux != null) && (aux.getSubtreeSize() > 0)) // ordem de analise = antes a primeira parte, colocar diferente
-                                                         // de nulo ali
+        if ((aux != null) && (aux.getSubtreeSize() > 0))
             return true;
         return false;
     }
 
-    // retorna true se o elemento está armazenado em um nodo externo
     boolean isExternal(Integer e) {
         TreeNode aux = searchNode(e, this.root);
-        if ((aux != null) && (aux.getSubtreeSize() == 0)) // ordem de analise = antes a primeira parte, colocar
-                                                          // diferente de nulo ali
+        if ((aux != null) && (aux.getSubtreeSize() == 0)) 
             return true;
         return false;
-        // return !isInternal(e); -- da erro, pois é nulo e nao tem valor!
     }
 
-    // retorna true se o elemento e está armazenado na raiz
     boolean isRoot(Integer e) {
         if ((root != null) && (e != null) && (root.value == e))
             return true;
         return false;
     }
 
-    // retorna true se a árvore está vazia
     boolean isEmpty() {
         return (nElements == 0);
     }
 
-    // retorna o número de elementos armazenados na árvore
     int size() {
         return nElements;
     }
 
-    // remove todos os elementos da árvore
     void clear() {
-        // requer navegação
-        // ou solução baseada em garbage collector
         root = null;
         nElements = 0;
     }
 
-    // CAMINHAMENTOS!
-    // retorna uma lista com todos os elementos da árvore na ordem pré-fixada
-    int[] positionsPre() {
-        return null;
-    }
-
-    // retorna uma lista com todos os elementos da árvore na ordem pos-fixada
-    int[] positionsPos() {
-        return null;
-    }
-
-    // retorna uma lista com todos os elementos da árvore com um caminhamento em
-    // largura
     int[] positionsWidth() {
         if (nElements == 0)
             return null;
 
         int[] lista = new int[this.nElements];
         int idx = 0;
-        int pos = 0;// referente a posicao da lista pra procurar o nodo certo
+        int pos = 0;
 
         lista[idx++] = root.value;
         while (idx < nElements) {
-            TreeNode aux = searchNode(lista[pos++], this.root);// vai dar problema com numeros repetidos, da pra colocar
-                                                               // como condicao
-            if (aux != null)
+            TreeNode aux = searchNode(lista[pos++], this.root);
                 for (int i = 0; i < aux.getSubtreeSize(); i++)
                     lista[idx++] = aux.getSubtree(i).value;
         }
@@ -247,19 +174,15 @@ public class GenericTree {
     }
 
     public void doTheString() {
-
         printValue(root);
-
     }
 
     private void printValue(TreeNode ref) {
-
         if (ref != null) {
             System.out.print(ref.value + "; ");
             for (int i = 0; i < ref.getSubtreeSize(); i++)
                 printValue(ref.getSubtree(i));
         }
-
     }
 
 }
