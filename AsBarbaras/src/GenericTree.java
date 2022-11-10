@@ -1,14 +1,14 @@
 public class GenericTree {   
     private class TreeNode {
-        public int value;
+        public String value;
         public TreeNode father;
         private TreeNode[] children;
         private int nChild;
 
-        public TreeNode(Integer element) {
+        public TreeNode(String nome) {
             father = null;
             children = new TreeNode[10];
-            value = element;
+            value = nome;
             nChild = 0;
         }
 
@@ -68,14 +68,14 @@ public class GenericTree {
         this.nElements = 0;
     }
 
-    private TreeNode searchNode(Integer value, TreeNode ref) {
+    private TreeNode searchNode(String nome, TreeNode ref) {
         if (ref != null) {
-            if (ref.value == value)
+            if (ref.value == nome)
                 return ref;
             else {
                 TreeNode aux = null;
                 for (int i = 0; i < ref.getSubtreeSize(); i++) {
-                    aux = searchNode(value, ref.getSubtree(i));
+                    aux = searchNode(nome, ref.getSubtree(i));
                     if (aux != null)
                         return aux;
                 }
@@ -85,59 +85,59 @@ public class GenericTree {
             return null;
     }
 
-    public boolean add(Integer e, Integer father) {
+    public boolean add(String n, String father) {
         TreeNode aux;
         if (nElements == 0) {
-            this.root = new TreeNode(e);
+            this.root = new TreeNode(n);
         } else {
             aux = searchNode(father, root);
             if (aux == null)
                 return false;
             else
-                aux.addSubtree(new TreeNode(e));
+                aux.addSubtree(new TreeNode(n));
         }
         nElements++;
         return true;
     }
 
-    public Integer getRoot() {
+    public String getRoot() {
         if (root != null)
             return root.value;
         return null;
     }
 
-    public void setRoot(Integer e) {
+    public void setRoot(String e) {
         if ((e != null) && (root != null)) {
             root.value = e;
         }
     }
 
-    public Integer getParent(Integer e) {
+    public String getParent(String e) {
         TreeNode aux = searchNode(e, this.root);
         if ((aux != null) && (aux.father != null))
             return aux.father.value;
         return null;
     }
 
-    boolean contains(Integer e) {
+    boolean contains(String e) {
         return (searchNode(e, this.root) == null) ? false : true;
     }
 
-    boolean isInternal(Integer e) {
+    boolean isInternal(String e) {
         TreeNode aux = searchNode(e, this.root);
         if ((aux != null) && (aux.getSubtreeSize() > 0))
             return true;
         return false;
     }
 
-    boolean isExternal(Integer e) {
+    boolean isExternal(String e) {
         TreeNode aux = searchNode(e, this.root);
         if ((aux != null) && (aux.getSubtreeSize() == 0)) 
             return true;
         return false;
     }
 
-    boolean isRoot(Integer e) {
+    boolean isRoot(String e) {
         if ((root != null) && (e != null) && (root.value == e))
             return true;
         return false;
@@ -156,11 +156,11 @@ public class GenericTree {
         nElements = 0;
     }
 
-    int[] positionsWidth() {
+    String[] positionsWidth() {
         if (nElements == 0)
             return null;
 
-        int[] lista = new int[this.nElements];
+        String[] lista = new String[this.nElements];
         int idx = 0;
         int pos = 0;
 
@@ -172,6 +172,41 @@ public class GenericTree {
         }
         return lista;
     }
+
+    int[] niveis() {
+        if (nElements == 0)
+            return null;
+
+        String[] lista = new String[this.nElements];
+        int[] lniveis = new int[lista.length];
+
+        int idx = 0;
+        int pos = 0;
+        int nivel = 0;
+        //int cont = 0;
+
+        lista[idx] = root.value;
+        lniveis[idx++] = nivel;
+
+        while (idx < nElements) {
+            TreeNode aux = searchNode(lista[pos++], this.root);
+            if (aux != null)
+                
+                for (int i = 0; i < aux.getSubtreeSize(); i++) {
+                    lniveis[idx] = nivel;
+                    lista[idx++] = aux.getSubtree(i).value;
+                }
+        }
+        return lniveis;
+    }//ainda ta dando errado, mas pensei em algumas ideias
+
+    boolean dentro(String[] l, String v) {
+        for (String n : l) {
+            if (v.equals(n)) 
+                return true;
+        }
+        return false;
+    }//procura a string dentro da arvore
 
     public void doTheString() {
         printValue(root);
