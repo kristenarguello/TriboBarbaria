@@ -27,34 +27,32 @@ public class GenericTree {
             children = aux;
         }
 
-        boolean removeSubtree(TreeNode n) {
-            if (n == null) {
-                return false;
-            }
-            int idx = -1;
-            for (int i = 0; i < nChild; i++)
-                if (children[i] == null) {
-                    idx = i;
-                    break;
-                }
-            if (idx == -1)
-                return false;
+        // boolean removeSubtree(TreeNode n) {
+        //     if (n == null) {
+        //         return false;
+        //     }
+        //     int idx = -1;
+        //     for (int i = 0; i < nChild; i++)
+        //         if (children[i] == null) {
+        //             idx = i;
+        //             break;
+        //         }
+        //     if (idx == -1)
+        //         return false;
 
-            for (int i = idx; i < nChild; i++)
-                children[i] = children[i + 1];
-            nChild--;
-            children[nChild] = null;
-            return true;
-        }
+        //     for (int i = idx; i < nChild; i++)
+        //         children[i] = children[i + 1];
+        //     nChild--;
+        //     children[nChild] = null;
+        //     return true;
+        // }
 
-        // busca subtree pelo indice dentro da lista de filhos
         TreeNode getSubtree(int i) {
             if (i >= 0 && i < nChild)
                 return children[i];
             return null;
         }
 
-        // retorna o número de filhos
         int getSubtreeSize() {
             return nChild;
         }
@@ -173,40 +171,55 @@ public class GenericTree {
         return lista;
     }
 
-    int[] niveis() {
-        if (nElements == 0)
-            return null;
-
-        String[] lista = new String[this.nElements];
-        int[] lniveis = new int[lista.length];
-
-        int idx = 0;
-        int pos = 0;
+    Queue valoresUltimoNivel() throws Exception {//solucao inspirada no geeks for geeks
         int nivel = 0;
-        //int cont = 0;
-
-        lista[idx] = root.value;
-        lniveis[idx++] = nivel;
-
-        while (idx < nElements) {
-            TreeNode aux = searchNode(lista[pos++], this.root);
-            if (aux != null)
-                
-                for (int i = 0; i < aux.getSubtreeSize(); i++) {
-                    lniveis[idx] = nivel;
-                    lista[idx++] = aux.getSubtree(i).value;
-                }
+        int contador = 0;
+        if (root == null)
+            return null;
+    
+        Queue q = new Queue();
+        q.add(root.value);
+        while (!q.isEmpty())
+        {
+            int n = q.size();
+    
+            while (n > 0)
+            {
+                TreeNode p = searchNode(q.peek(), root);
+                q.remove();
+                System.out.print(p.value + "  -  ");
+    
+                for (int i = 0; i < p.getSubtreeSize(); i++)
+                    q.add(p.getSubtree(i).value);
+                n--;
+            }
+            nivel++;
+            System.out.println();
         }
-        return lniveis;
-    }//ainda ta dando errado, mas pensei em algumas ideias
+        System.out.println("altura: " + nivel);
 
-    boolean dentro(String[] l, String v) {
-        for (String n : l) {
-            if (v.equals(n)) 
-                return true;
+        Queue ultimo = new Queue();
+        q.clear();
+        q.add(root.value);
+        while (!q.isEmpty())
+        {
+            int n = q.size();
+            while (n > 0)
+            {
+                TreeNode p = searchNode(q.peek(), root);
+                q.remove();
+                if (contador==nivel-1)
+                    ultimo.add(p.value);
+    
+                for (int i = 0; i < p.getSubtreeSize(); i++)
+                    q.add(p.getSubtree(i).value);
+                n--;
+            }
+            contador++;
         }
-        return false;
-    }//procura a string dentro da arvore
+        ultimo.exibirLista();
+        return ultimo;
+    }
 
     public void doTheString() {
         printValue(root);
