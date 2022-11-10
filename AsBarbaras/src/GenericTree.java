@@ -27,26 +27,6 @@ public class GenericTree {
             children = aux;
         }
 
-        // boolean removeSubtree(TreeNode n) {
-        //     if (n == null) {
-        //         return false;
-        //     }
-        //     int idx = -1;
-        //     for (int i = 0; i < nChild; i++)
-        //         if (children[i] == null) {
-        //             idx = i;
-        //             break;
-        //         }
-        //     if (idx == -1)
-        //         return false;
-
-        //     for (int i = idx; i < nChild; i++)
-        //         children[i] = children[i + 1];
-        //     nChild--;
-        //     children[nChild] = null;
-        //     return true;
-        // }
-
         TreeNode getSubtree(int i) {
             if (i >= 0 && i < nChild)
                 return children[i];
