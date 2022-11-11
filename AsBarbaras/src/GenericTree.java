@@ -1,14 +1,14 @@
 public class GenericTree {   
     private class TreeNode {
-        public String value;
+        public Barbaro value;
         public TreeNode father;
         private TreeNode[] children;
         private int nChild;
 
-        public TreeNode(String nome) {
+        public TreeNode(Barbaro b) {
             father = null;
             children = new TreeNode[10];
-            value = nome;
+            value = b;
             nChild = 0;
         }
 
@@ -46,14 +46,14 @@ public class GenericTree {
         this.nElements = 0;
     }
 
-    private TreeNode searchNode(String nome, TreeNode ref) {
+    private TreeNode searchNode(Barbaro b, TreeNode ref) {
         if (ref != null) {
-            if (ref.value == nome)
+            if (ref.value == b)
                 return ref;
             else {
                 TreeNode aux = null;
                 for (int i = 0; i < ref.getSubtreeSize(); i++) {
-                    aux = searchNode(nome, ref.getSubtree(i));
+                    aux = searchNode(b, ref.getSubtree(i));
                     if (aux != null)
                         return aux;
                 }
@@ -63,7 +63,7 @@ public class GenericTree {
             return null;
     }
 
-    public boolean add(String n, String father) {
+    public boolean add(Barbaro n, Barbaro father) {
         TreeNode aux;
         if (nElements == 0) {
             this.root = new TreeNode(n);
@@ -78,44 +78,44 @@ public class GenericTree {
         return true;
     }
 
-    public String getRoot() {
+    public Barbaro getRoot() {
         if (root != null)
             return root.value;
         return null;
     }
 
-    public void setRoot(String e) {
+    public void setRoot(Barbaro e) {
         if ((e != null) && (root != null)) {
             root.value = e;
         }
     }
 
-    public String getParent(String e) {
+    public Barbaro getParent(Barbaro e) {
         TreeNode aux = searchNode(e, this.root);
         if ((aux != null) && (aux.father != null))
             return aux.father.value;
         return null;
     }
 
-    boolean contains(String e) {
+    boolean contains(Barbaro e) {
         return (searchNode(e, this.root) == null) ? false : true;
     }
 
-    boolean isInternal(String e) {
+    boolean isInternal(Barbaro e) {
         TreeNode aux = searchNode(e, this.root);
         if ((aux != null) && (aux.getSubtreeSize() > 0))
             return true;
         return false;
     }
 
-    boolean isExternal(String e) {
+    boolean isExternal(Barbaro e) {
         TreeNode aux = searchNode(e, this.root);
         if ((aux != null) && (aux.getSubtreeSize() == 0)) 
             return true;
         return false;
     }
 
-    boolean isRoot(String e) {
+    boolean isRoot(Barbaro e) {
         if ((root != null) && (e != null) && (root.value == e))
             return true;
         return false;
@@ -134,11 +134,11 @@ public class GenericTree {
         nElements = 0;
     }
 
-    String[] positionsWidth() {
+    Barbaro[] positionsWidth() {
         if (nElements == 0)
             return null;
 
-        String[] lista = new String[this.nElements];
+        Barbaro[] lista = new Barbaro[this.nElements];
         int idx = 0;
         int pos = 0;
 
@@ -149,56 +149,6 @@ public class GenericTree {
                     lista[idx++] = aux.getSubtree(i).value;
         }
         return lista;
-    }
-
-    Queue valoresUltimoNivel() throws Exception {//solucao inspirada no geeks for geeks
-        int nivel = 0;
-        int contador = 0;
-        if (root == null)
-            return null;
-    
-        Queue q = new Queue();
-        q.add(root.value);
-        while (!q.isEmpty())
-        {
-            int n = q.size();
-    
-            while (n > 0)
-            {
-                TreeNode p = searchNode(q.peek(), root);
-                q.remove();
-                System.out.print(p.value + "  -  ");
-    
-                for (int i = 0; i < p.getSubtreeSize(); i++)
-                    q.add(p.getSubtree(i).value);
-                n--;
-            }
-            nivel++;
-            System.out.println();
-        }
-        System.out.println("altura: " + nivel);
-
-        Queue ultimo = new Queue();
-        q.clear();
-        q.add(root.value);
-        while (!q.isEmpty())
-        {
-            int n = q.size();
-            while (n > 0)
-            {
-                TreeNode p = searchNode(q.peek(), root);
-                q.remove();
-                if (contador==nivel-1)
-                    ultimo.add(p.value);
-    
-                for (int i = 0; i < p.getSubtreeSize(); i++)
-                    q.add(p.getSubtree(i).value);
-                n--;
-            }
-            contador++;
-        }
-        ultimo.exibirLista();
-        return ultimo;
     }
 
     public void doTheString() {
