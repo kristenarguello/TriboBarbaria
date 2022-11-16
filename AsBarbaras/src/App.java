@@ -7,4 +7,5 @@ public class App {
     }
     //iterar pela coisa e se tiver nivel maximo = (nao tem maior)
     //ver quais que tem maior terra
+    //como criar os nodos?s
 }

@@ -7,14 +7,14 @@ public class Barbaro {
     private static int cont;
 
 
-    public Barbaro(String nome, int terras, Barbaro pai) {
+    public Barbaro(Barbaro pai, String nome, int terras) {
         this.nome = nome;
         this.terras = terras;
+        this.pai = pai;
         if (cont == 0) 
             nivel = 0;
         else 
             nivel = pai.getNivel() + 1;
-        
         cont++;
     }  
 

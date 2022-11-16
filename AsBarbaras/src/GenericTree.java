@@ -151,6 +151,29 @@ public class GenericTree {
         return lista;
     }
 
+    int ultimoNivel() {
+        Barbaro[] lista = positionsWidth();
+        int maior = 0;
+        for (Barbaro b : lista) {
+            if (b.getNivel() > maior)
+                maior = b.getNivel();
+        }
+        return maior;
+    }
+
+    Barbaro[] ultimaGeracao() {
+        Barbaro[] lista = positionsWidth();
+        Barbaro[] aux = new Barbaro[lista.length];
+        int pos = 0;
+        for (Barbaro b : lista) {
+            if (b.getNivel()==ultimoNivel()){
+                aux[pos] = b;
+                pos++;
+            }
+        }
+        return aux;
+    }
+
     public void doTheString() {
         printValue(root);
     }
