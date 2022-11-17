@@ -174,6 +174,17 @@ public class GenericTree {
         return aux;
     }
 
+    public void distribuicaoTerras() {
+        Barbaro[] lista = positionsWidth();
+        for (Barbaro b : lista) {
+            if (b.getPai()!=null) {
+                TreeNode aux = new TreeNode(b.getPai());
+                int herdadas = b.getPai().getTerras() / aux.getSubtreeSize();
+                b.setTerras(herdadas);
+            }
+        }
+    }
+
     public void doTheString() {
         printValue(root);
     }
