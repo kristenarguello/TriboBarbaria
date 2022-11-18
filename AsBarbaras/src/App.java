@@ -25,11 +25,11 @@ public class App {
         System.out.println("\nBarbaro que possui mais terras na árvore genealógica 4:");
         System.out.println(gt3.maisTerras());
 
-        // GenericTree gt4 = new GenericTree();
-        // gt4.readFile("exemplo.txt");
-        // gt4.distribuicaoTerras();
-        // System.out.println("\n\nBarbaro que possui mais terras na árvore genealógica 5:");
-        // System.out.println(gt4.maisTerras());
+        GenericTree gt4 = new GenericTree();
+        gt4.readFile("ArvoreQuatro.txt");
+        gt4.distribuicaoTerras();
+        System.out.println("\nBarbaro que possui mais terras na árvore genealógica 5:");
+        System.out.println(gt4.maisTerras());
         
     }
 
