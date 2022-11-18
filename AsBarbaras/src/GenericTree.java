@@ -276,34 +276,20 @@ public class GenericTree {
     {
         if (root == null)
             return;
-    
-        // Standard level order traversal code
-        // using queue
-        Queue<TreeNode > q = new LinkedList<>(); // Create a queue
-        q.add(root); // Enqueue root
+        Queue<TreeNode > q = new LinkedList<>();
+        q.add(root);
         while (!q.isEmpty())
         {
             int n = q.size();
-    
-            // If this node has children
             while (n > 0)
             {
-                // Dequeue an item from queue
-                // and print it
                 TreeNode p = q.peek();
                 q.remove();
                 System.out.print(p.value.getNome() + " | nivel: "+ p.value.getNivel()+ " | terras: " + p.value.getTerras() +" -- ");
-    
-                // Enqueue all children of
-                // the dequeued item
                 for (int i = 0; i < p.getSubtreeSize(); i++)
                 q.add(p.getSubtree(i));
                 n--;
             }
-            
-            // Print new line between two levels
-            System.out.println();
-            System.out.println();
             System.out.println();
         }
     }
