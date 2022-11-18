@@ -44,7 +44,7 @@ public class GenericTree {
     public GenericTree() {
         this.root = null;
         this.nElements = 0;
-    }
+    } 
 
     private TreeNode searchNode(Barbaro b, TreeNode ref) {
         if (ref != null) {
@@ -62,13 +62,30 @@ public class GenericTree {
         } else
             return null;
     }
+    
+    Barbaro searchBarbaro(String b, TreeNode ref) {
+        if (ref != null) {
+            if (ref.value.getNome() == b)
+                return ref.value;
+            else {
+                Barbaro aux = null;
+                for (int i = 0; i < ref.getSubtreeSize(); i++) {
+                    aux = searchBarbaro(b, ref.getSubtree(i));
+                    if (aux != null)
+                        return aux;
+                }
+                return null;
+            }
+        } else
+            return null;
+    }
 
-    public boolean add(Barbaro n, Barbaro father) {
+    public boolean add(Barbaro n) {
         TreeNode aux;
         if (nElements == 0) {
             this.root = new TreeNode(n);
         } else {
-            aux = searchNode(father, root);
+            aux = searchNode(n.getPai(), root);
             if (aux == null)
                 return false;
             else
@@ -78,9 +95,9 @@ public class GenericTree {
         return true;
     }
 
-    public Barbaro getRoot() {
+    public TreeNode getRoot() {
         if (root != null)
-            return root.value;
+            return root;
         return null;
     }
 
@@ -165,21 +182,35 @@ public class GenericTree {
         Barbaro[] lista = positionsWidth();
         Barbaro[] aux = new Barbaro[lista.length];
         int pos = 0;
+        int ultimoNivel = ultimoNivel();
         for (Barbaro b : lista) {
-            if (b.getNivel()==ultimoNivel()){
+            if (b.getNivel()==ultimoNivel){
                 aux[pos] = b;
                 pos++;
             }
         }
         return aux;
     }
+    
+    Barbaro maisTerras() {
+        Barbaro[] lista = ultimaGeracao();
+        int maior = 0;
+        Barbaro maisRico = null;
+        for (Barbaro b : lista) {
+            if (b.getTerras() > maior) {
+                maior = b.getTerras();
+                maisRico = b;
+            }
+        }
+        return maisRico;
+    }
 
-    public void distribuicaoTerras() {
+    void distribuicaoTerras() {
         Barbaro[] lista = positionsWidth();
         for (Barbaro b : lista) {
             if (b.getPai()!=null) {
-                TreeNode aux = new TreeNode(b.getPai());
-                int herdadas = b.getPai().getTerras() / aux.getSubtreeSize();
+                TreeNode aux = searchNode(b.getPai(), this.root);
+                int herdadas = aux.value.getTerras() / aux.getSubtreeSize();
                 b.setTerras(herdadas);
             }
         }

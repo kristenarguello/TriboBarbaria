@@ -4,7 +4,7 @@ public class Barbaro {
     private int nivel;
     private Barbaro pai;
 
-    private static int cont;
+    private static int cont = 0;
 
 
     public Barbaro(Barbaro pai, String nome, int terras) {
@@ -15,7 +15,6 @@ public class Barbaro {
             nivel = 0;  
         else 
             nivel = pai.getNivel() + 1;
-            //this.terras = (pai.getTerras()/pai) + terras;
         cont++;
     }  
 
