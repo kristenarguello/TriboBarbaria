@@ -4,18 +4,14 @@ public class Barbaro {
     private int nivel;
     private Barbaro pai;
 
-    private static int cont = 0;
-
-
     public Barbaro(Barbaro pai, String nome, int terras) {
         this.nome = nome;
         this.terras = terras;
         this.pai = pai;
-        if (cont == 0) 
+        if (pai == null) 
             nivel = 1;  
         else 
             nivel = pai.getNivel() + 1;
-        cont++;
     }  
 
     public String getNome() {
