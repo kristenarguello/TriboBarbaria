@@ -7,13 +7,11 @@ import java.io.IOException;
 public class App {
     public static void main(String[] args) throws Exception {
         GenericTree gt = new GenericTree();
-        
-
+        readFile(,gt);
+        gt.distribuicaoTerras();
+        System.out.println(gt.maisTerras());
         
     }
-    //iterar pela coisa e se tiver nivel maximo = (nao tem maior)
-    //ver quais que tem maior terra
-    //como criar os nodos?s
 
     public boolean readFile(String nomeArq, GenericTree gt) {
         Path path1 = Paths.get(nomeArq);
