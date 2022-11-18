@@ -12,7 +12,7 @@ public class Barbaro {
         this.terras = terras;
         this.pai = pai;
         if (cont == 0) 
-            nivel = 0;  
+            nivel = 1;  
         else 
             nivel = pai.getNivel() + 1;
         cont++;
