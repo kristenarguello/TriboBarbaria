@@ -34,7 +34,7 @@ public class Barbaro {
     }
 
     public String toString() {
-        return nome + " possui " + terras + ", geração: " + nivel;
+        return nome + " que possui " + terras + ", está na geração: " + nivel;
     }
 
     
