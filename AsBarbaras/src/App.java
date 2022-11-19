@@ -30,6 +30,12 @@ public class App {
         gt4.readFile("ArvoreQuatro.txt");
         gt4.distribuicaoTerras();
         System.out.println("\nÁRVORE GENEALÓGICA 4: " + gt4.maisTerras());
+        System.out.println("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+        
+        GenericTree gt5 = new GenericTree();
+        gt5.readFile("ArvoreCinco.txt");
+        gt5.distribuicaoTerras();
+        System.out.println("\nÁRVORE GENEALÓGICA 5: " + gt5.maisTerras());
         
     }
 
