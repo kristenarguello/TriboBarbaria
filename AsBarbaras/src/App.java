@@ -1,4 +1,3 @@
-
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("\nBÁRBARO QUE POSSUI MAIS TERRAS É...");
@@ -36,7 +35,6 @@ public class App {
         gt5.readFile("ArvoreCinco.txt");
         gt5.distribuicaoTerras();
         System.out.println("\nÁRVORE GENEALÓGICA 5: " + gt5.maisTerras());
-        
     }
 
 }
