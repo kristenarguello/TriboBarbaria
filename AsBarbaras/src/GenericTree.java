@@ -1,4 +1,6 @@
 import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.charset.Charset;
@@ -219,5 +221,31 @@ public class GenericTree {
             System.err.format("Erro de E/S: %s%n", x);
         }
         return true;
+    }
+
+    public void LevelOrderTraversal(TreeNode root)
+    {
+        if (root == null)
+            return;
+        Queue<TreeNode > q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty())
+        {
+            int n = q.size();
+            while (n > 0)
+            {
+                TreeNode p = q.peek();
+                q.remove();
+                System.out.print(p.value.getNome() + " | nivel: "+ p.value.getNivel()+ " | terras: " + p.value.getTerras() +" -- ");
+                for (int i = 0; i < p.getSubtreeSize(); i++)
+                q.add(p.getSubtree(i));
+                n--;
+            }
+            System.out.println();
+        }
+    }
+
+    public TreeNode getRoot() {
+        return root;
     }
 }
